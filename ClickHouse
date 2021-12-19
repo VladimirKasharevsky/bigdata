@@ -1,0 +1,48 @@
+--General
+select
+       date as Date,
+       count(event) as Events,
+       uniqExact(campaign_union_id) as Campaigns,
+       countIf(event = 'click') as Clicks,
+       count(ad_id) as AdDisplayed,
+       uniqExact(ad_id) as UniqueAds,
+       uniqExact(campaign_union_id) as Campaigns
+from ads_data
+group by date;
+
+---------------------------------------
+
+-- Calculate number of events per days
+select
+       date as Date,
+       count(event) as Events
+from ads_data
+group by date;
+
+-- Calculate number of clicks per days
+select
+       date as Date,
+       countIf(event = 'click') as Clicks
+from ads_data
+group by date;
+
+-- Count of each ad displayed per days
+select
+       date as Date,
+       count(ad_id) as AdDisplayed
+from ads_data
+group by date;
+
+-- Number of unique ads
+select
+       date as Date,
+       uniqExact(ad_id) as UniqueAds
+from ads_data
+group by date;
+
+-- Number of unique campaigns
+select
+       date as Date,
+       uniqExact(campaign_union_id) as Campaigns
+from ads_data
+group by date;
